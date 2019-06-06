@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Cerebro.Util;
 
 namespace Cerebro
 {
@@ -24,6 +25,11 @@ namespace Cerebro
             get { return this.values.GetLength(1); }
         }
 
+        public int LinearSize
+        {
+            get { return this.Rows * this.Cols; }
+        }
+
         public Matrix(int r, int c)
         {
             this.values = new float[r, c];
@@ -39,13 +45,28 @@ namespace Cerebro
             int r = this.Rows;
             int c = this.Cols;
 
-            Random rnd = new Random();
+            for (int j = 0; j < r; j++)
+            {
+                for (int i = 0; i < c; i++)
+                {
+                    this.values[j, i] = StaticRandom.NextBilinear(amplitude);
+                }
+            }
+        }
+
+        public void Set(float[] flatArray)
+        {
+            int r = this.Rows;
+            int c = this.Cols;
+
+            int k = 0;
 
             for (int j = 0; j < r; j++)
             {
                 for (int i = 0; i < c; i++)
                 {
-                    this.values[j, i] = (float)((rnd.NextDouble() * 2) - 1) * amplitude;
+                    this.values[j, i] = flatArray[k];
+                    k++;
                 }
             }
         }
@@ -88,7 +109,7 @@ namespace Cerebro
         {
             float[] result = new float[this.Rows * this.Cols];
             int k = 0;
-            
+
             for (int j = 0; j < this.Rows; j++)
             {
                 for (int i = 0; i < this.Cols; i++)

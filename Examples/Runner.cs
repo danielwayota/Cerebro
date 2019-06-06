@@ -1,23 +1,48 @@
 ﻿using System;
 using Cerebro;
 using Cerebro.Activation;
+using Cerebro.Genetics;
 
 namespace Examples
 {
     class Runner
     {
+        static void PrintArray(float[] array) {
+            foreach (var item in array)
+            {
+                Console.Write(item + ", ");
+            }
+            Console.WriteLine();
+        }
         static void Main(string[] args)
         {
-            Layer[] ls = new Layer[] {
+            Layer[] ls1 = new Layer[] {
                 new Layer(2, 3, new Tanh()),
                 new Layer(3, 2, new Tanh())
             };
+            Network net1 = new Network(ls1);
 
-            Network net = new Network(ls);
+            Layer[] ls2 = new Layer[] {
+                new Layer(2, 3, new Tanh()),
+                new Layer(3, 2, new Tanh())
+            };
+            Network net2 = new Network(ls2);
 
-            var result = net.Run(new float[] { 1f, 1f });
+            var result = net1.Run(new float[] { 1f, 1f });
+            PrintArray(result);
 
-            Console.WriteLine(result[0] + " " + result[1]);
+            result = net2.Run(new float[] { 1f, 1f });
+            PrintArray(result);
+
+            net2.SetGenome(net1.GetGenome());
+
+            Console.WriteLine("CLONE");
+
+            result = net1.Run(new float[] { 1f, 1f });
+            PrintArray(result);
+
+            result = net2.Run(new float[] { 1f, 1f });
+            PrintArray(result);
 
             // Builder example
             // TODO:
