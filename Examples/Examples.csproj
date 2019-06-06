@@ -36,6 +36,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EvoXOR.cs" />
     <Compile Include="Runner.cs" />
   </ItemGroup>
   <ItemGroup>

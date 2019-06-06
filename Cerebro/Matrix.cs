@@ -87,7 +87,7 @@ namespace Cerebro
             {
                 for (int i = 0; i < c; i++)
                 {
-                    this.values[j, i] = some.Values[j,i];
+                    this.values[j, i] += some.Values[j,i];
                 }
             }
         }
@@ -142,6 +142,11 @@ namespace Cerebro
         public static Matrix From1DColum(float[] values)
         {
             float[,] data = new float[values.GetLength(0), 1];
+
+            for (int i = 0; i < values.GetLength(0); i++)
+            {
+                data[i, 0] = values[i];
+            }
 
             return new Matrix(data);
         }

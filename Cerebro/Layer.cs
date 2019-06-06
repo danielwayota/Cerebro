@@ -21,10 +21,10 @@ namespace Cerebro
         public Layer(int lastNeurons, int neuronCount, IActivator activator)
         {
             this.weights = new Matrix(neuronCount, lastNeurons);
-            this.weights.Randomize();
+            this.weights.Randomize(10f);
 
             this.bias = new Matrix(neuronCount, 1);
-            this.bias.Randomize();
+            this.bias.Randomize(10f);
 
             this.activator = activator;
         }

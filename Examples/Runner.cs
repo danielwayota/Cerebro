@@ -16,33 +16,7 @@ namespace Examples
         }
         static void Main(string[] args)
         {
-            Layer[] ls1 = new Layer[] {
-                new Layer(2, 3, new Tanh()),
-                new Layer(3, 2, new Tanh())
-            };
-            Network net1 = new Network(ls1);
-
-            Layer[] ls2 = new Layer[] {
-                new Layer(2, 3, new Tanh()),
-                new Layer(3, 2, new Tanh())
-            };
-            Network net2 = new Network(ls2);
-
-            var result = net1.Run(new float[] { 1f, 1f });
-            PrintArray(result);
-
-            result = net2.Run(new float[] { 1f, 1f });
-            PrintArray(result);
-
-            net2.SetGenome(net1.GetGenome());
-
-            Console.WriteLine("CLONE");
-
-            result = net1.Run(new float[] { 1f, 1f });
-            PrintArray(result);
-
-            result = net2.Run(new float[] { 1f, 1f });
-            PrintArray(result);
+            EvoXOR.Run();
 
             // Builder example
             // TODO:

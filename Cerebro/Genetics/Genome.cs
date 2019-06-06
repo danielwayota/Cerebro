@@ -30,7 +30,7 @@ namespace Cerebro.Genetics
 
                 if (dice < chance)
                 {
-                    this.Genes[i] = StaticRandom.NextBilinear();
+                    this.Genes[i] = StaticRandom.NextBilinear(10f);
                 }
             }
         }
