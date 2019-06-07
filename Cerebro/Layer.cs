@@ -82,10 +82,7 @@ namespace Cerebro
         /// <returns></returns>
         public float[] GetGenes()
         {
-            float[] flatweights = this.weights.Flatten();
-            float[] flatbias = this.bias.Flatten();
-
-            float[] fullValues = Genome.Concatenate(flatweights, flatbias);
+            float[] fullValues = Genome.Concatenate(this.weights.Values, this.bias.Values);
 
             return fullValues;
         }

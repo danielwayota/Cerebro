@@ -51,7 +51,7 @@ namespace Cerebro
                 result = layer.Activate(result);
             }
 
-            return result.Flatten();
+            return result.Values;
         }
 
         /// =================================================

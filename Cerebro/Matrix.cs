@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Cerebro.Util;
@@ -7,20 +7,20 @@ namespace Cerebro
 {
     public class Matrix
     {
-        private float[,] values;
-        public float[,] Values
+        private float[] values;
+        public float[] Values
         {
             get { return this.values; }
         }
 
         public int Rows
         {
-            get { return this.values.GetLength(0); }
+            get; protected set;
         }
 
         public int Cols
         {
-            get { return this.values.GetLength(1); }
+            get; protected set;
         }
 
         public int LinearSize
@@ -38,7 +38,10 @@ namespace Cerebro
         /// <param name="c">Column count</param>
         public Matrix(int r, int c)
         {
-            this.values = new float[r, c];
+            this.Rows = r;
+            this.Cols = c;
+
+            this.values = new float[r * c];
         }
 
         /// =================================================
@@ -47,8 +50,11 @@ namespace Cerebro
         /// </summary>
         ///
         /// <param name="values"></param>
-        public Matrix(float[,] values)
+        public Matrix(float[] values, int r, int c)
         {
+            this.Rows = r;
+            this.Cols = c;
+
             this.values = values;
         }
 
@@ -60,15 +66,9 @@ namespace Cerebro
         /// <param name="amplitude"></param>
         public void Randomize(float amplitude = 1.0f)
         {
-            int r = this.Rows;
-            int c = this.Cols;
-
-            for (int j = 0; j < r; j++)
+            for (int i = 0; i < this.values.Length; i++)
             {
-                for (int i = 0; i < c; i++)
-                {
-                    this.values[j, i] = StaticRandom.NextBilinear(amplitude);
-                }
+                this.values[i] = StaticRandom.NextBilinear(amplitude);
             }
         }
 
@@ -80,25 +80,16 @@ namespace Cerebro
         /// <param name="flatArray"></param>
         public void Set(float[] flatArray)
         {
-            if (flatArray.Length != this.LinearSize)
+            if (flatArray.Length != this.values.Length)
             {
                 throw new InvalidOperationException(
                     String.Format("The Matrix and the 1D array have diferent linear lengths. {0} != {1}", this.LinearSize, flatArray.Length)
                 );
             }
 
-            int r = this.Rows;
-            int c = this.Cols;
-
-            int k = 0;
-
-            for (int j = 0; j < r; j++)
+            for (int i = 0; i < this.values.Length; i++)
             {
-                for (int i = 0; i < c; i++)
-                {
-                    this.values[j, i] = flatArray[k];
-                    k++;
-                }
+                this.values[i] = flatArray[i];
             }
         }
 
@@ -120,12 +111,9 @@ namespace Cerebro
                 );
             }
 
-            for (int j = 0; j < r; j++)
+            for (int i = 0; i < this.values.Length; i++)
             {
-                for (int i = 0; i < c; i++)
-                {
-                    this.values[j, i] += some.Values[j,i];
-                }
+                this.values[i] += some.Values[i];
             }
         }
 
@@ -143,34 +131,15 @@ namespace Cerebro
             {
                 for (int i = 0; i < c; i++)
                 {
-                    this.values[j, i] = runner(this.values[j, i]);
+                    this.values[j * this.Cols + i] = runner(this.values[j * this.Cols + i]);
                 }
             }
         }
 
-        /// =================================================
+        // =================================================
         /// <summary>
-        /// Converts the Matrix into a 1D float array
+        /// Prints the Matrix to the std out
         /// </summary>
-        ///
-        /// <returns></returns>
-        public float[] Flatten()
-        {
-            float[] result = new float[this.Rows * this.Cols];
-            int k = 0;
-
-            for (int j = 0; j < this.Rows; j++)
-            {
-                for (int i = 0; i < this.Cols; i++)
-                {
-                    result[k] = this.values[j, i];
-                    k++;
-                }
-            }
-
-            return result;
-        }
-
         public void Print()
         {
             int r = this.Rows;
@@ -180,7 +149,7 @@ namespace Cerebro
             {
                 for (int i = 0; i < c; i++)
                 {
-                    Console.Write(this.values[j, i] + " ");
+                    Console.Write(this.values[j * this.Cols + i] + " ");
                 }
                 Console.WriteLine();
             }
@@ -192,21 +161,18 @@ namespace Cerebro
 
         /// =================================================
         /// <summary>
-        /// Creates a Column matrix with some 1D array
+        /// Creates a Column Matrix with some 1D array
         /// </summary>
         ///
         /// <param name="values"></param>
         /// <returns></returns>
         public static Matrix From1DColum(float[] values)
         {
-            float[,] data = new float[values.GetLength(0), 1];
+            float[] data = new float[values.Length];
 
-            for (int i = 0; i < values.GetLength(0); i++)
-            {
-                data[i, 0] = values[i];
-            }
+            Array.Copy(values, data, values.Length);
 
-            return new Matrix(data);
+            return new Matrix(data, data.Length, 1);
         }
 
         /// =================================================
@@ -226,7 +192,7 @@ namespace Cerebro
                 );
             }
 
-            float[,] newValues = new float[a.Rows, b.Cols];
+            float[] newValues = new float[a.Rows * b.Cols];
 
             for (int j = 0; j < a.Rows; j++)
             {
@@ -235,15 +201,15 @@ namespace Cerebro
                     float sum = 0;
                     for (int k = 0; k < a.Cols; k++)
                     {
-                        sum += a.Values[j, k] * b.Values[k, i];
+                        sum += a.Values[j * a.Cols + k] * b.Values[k * b.Cols + i];
                     }
 
-                    newValues[j, i] = sum;
+                    newValues[j * b.Cols + i] = sum;
                 }
             }
 
 
-            return new Matrix(newValues);
+            return new Matrix(newValues, a.Rows, b.Cols);
         }
     }
 }
