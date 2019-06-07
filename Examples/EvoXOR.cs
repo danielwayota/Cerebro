@@ -17,13 +17,7 @@ namespace Examples
 
             for (int i = 0; i < popMax; i++)
             {
-                Layer[] ls1 = new Layer[] {
-                    new Layer(2, 2, new Tanh()),
-                    new Layer(2, 1, new Sigmoid())
-                };
-                population.Add(
-                    new Network(ls1)
-                );
+                population.Add( CreateNetwork() );
             }
 
             // The record
@@ -51,6 +45,8 @@ namespace Examples
 
                     total += f;
                 }
+
+                // Write to the console the current king and the average fitness
                 if (generation % 250 == 0)
                 {
                     Console.WriteLine(String.Format("Gen {0}", generation));
@@ -60,7 +56,6 @@ namespace Examples
                     Console.WriteLine(String.Format(" - (1, 0) = {0:0.00}", king.Run(new float[] { 1.0f, 0.0f })[0]));
                     Console.WriteLine(String.Format(" - (0, 1) = {0:0.00}", king.Run(new float[] { 0.0f, 1.0f })[0]));
                     Console.WriteLine(String.Format(" - (1, 1) = {0:0.00}", king.Run(new float[] { 1.0f, 1.0f })[0]));
-
                 }
 
                 // Make new population
@@ -83,15 +78,10 @@ namespace Examples
                             parents.Add(population[index]);
                         }
                     }
-                    Layer[] layers = new Layer[] {
-                            new Layer(2, 2, new Tanh()),
-                            new Layer(2, 1, new Sigmoid())
-                        };
 
-                    Network offspring = new Network(layers);
+                    Network offspring = CreateNetwork();
 
-
-                    // Perform cross over
+                    // Perform cross over and 'inject' the new Genome into the new network
                     if (parents.Count == 2)
                     {
                         Genome e1 = parents[0].GetGenome();
@@ -106,6 +96,8 @@ namespace Examples
                 }
                 population = newPop;
             }
+
+            // Show the final results
             if (king != null)
             {
                 Console.WriteLine("FINAL");
@@ -118,6 +110,16 @@ namespace Examples
             }
         }
 
+        public static Network CreateNetwork()
+        {
+            Layer[] layers = new Layer[] {
+                new Layer(2, 2, new Tanh()),
+                new Layer(2, 1, new Sigmoid())
+            };
+
+            return new Network(layers);
+        }
+
         public static float CalcFitness(Network network)
         {
             float[][] input = new float[][]{
@@ -127,7 +129,7 @@ namespace Examples
                 new float[] { 1.0f, 1.0f }
             };
 
-            float[] results = new float[] { 0.0f, 1.0f, 1.0f, 0.0f };
+            float[] spectedResults = new float[] { 0.0f, 1.0f, 1.0f, 0.0f };
 
             float fitness = 0f;
 
@@ -135,7 +137,7 @@ namespace Examples
             {
                 float guess = network.Run(input[i])[0];
 
-                float error = results[i] - guess;
+                float error = spectedResults[i] - guess;
 
                 error = (error < 0) ? error * (-1) : error;
                 error = (error > 1) ? 1 : error;

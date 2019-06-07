@@ -23,11 +23,25 @@ namespace Cerebro
             }
         }
 
+        /// =================================================
+        /// <summary>
+        /// Default Neural network constructor
+        /// </summary>
+        ///
+        /// <param name="layers">The layers array</param>
         public Network(Layer[] layers)
         {
             this.Layers = layers;
         }
 
+        /// =================================================
+        /// <summary>
+        /// Executes the feedfoward of the network
+        /// </summary>
+        ///
+        /// <param name="input">The array with the input values</param>
+        ///
+        /// <returns>The result produced by the network</returns>
         public float[] Run(float[] input)
         {
             Matrix result = Matrix.From1DColum(input);
@@ -40,6 +54,12 @@ namespace Cerebro
             return result.Flatten();
         }
 
+        /// =================================================
+        /// <summary>
+        /// Uses the given genome to modify the weigts and bias of the network
+        /// </summary>
+        ///
+        /// <param name="genome">Genome class instance</param>
         public void SetGenome(Genome genome)
         {
             if (this.GenomeSize != genome.Size)
@@ -65,7 +85,12 @@ namespace Cerebro
             }
         }
 
-
+        /// =================================================
+        /// <summary>
+        /// Creates a genome object with the weights of the network
+        /// </summary>
+        ///
+        /// <returns>The genome</returns>
         public Genome GetGenome()
         {
             List<float> genes = new List<float>();

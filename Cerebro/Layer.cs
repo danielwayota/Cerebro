@@ -18,6 +18,14 @@ namespace Cerebro
 
         private IActivator activator;
 
+        /// =================================================
+        /// <summary>
+        /// Default layer constructor
+        /// </summary>
+        ///
+        /// <param name="lastNeurons">The neuron count of the previous layer</param>
+        /// <param name="neuronCount">Current layer neuron count</param>
+        /// <param name="activator"></param>
         public Layer(int lastNeurons, int neuronCount, IActivator activator)
         {
             this.weights = new Matrix(neuronCount, lastNeurons);
@@ -29,6 +37,13 @@ namespace Cerebro
             this.activator = activator;
         }
 
+        /// =================================================
+        /// <summary>
+        /// Performs the feedforward of this layer and returns the result
+        /// </summary>
+        ///
+        /// <param name="input"></param>
+        /// <returns></returns>
         public Matrix Activate(Matrix input)
         {
             Matrix result = Matrix.Product(weights, input);
@@ -39,6 +54,12 @@ namespace Cerebro
             return result;
         }
 
+        /// =================================================
+        /// <summary>
+        /// Uses some 1D float array to set the weight and bias values
+        /// </summary>
+        ///
+        /// <param name="genes"></param>
         public void SetGenes(float[] genes)
         {
             if (this.GenomeSize != genes.Length)
@@ -54,12 +75,17 @@ namespace Cerebro
             this.bias.Set(b);
         }
 
+        /// =================================================
+        /// <summary>
+        /// Returns some 1D float array with the weight and bias
+        /// </summary>
+        /// <returns></returns>
         public float[] GetGenes()
         {
             float[] flatweights = this.weights.Flatten();
             float[] flatbias = this.bias.Flatten();
 
-            float[] fullValues = Genome.MergeGenes(flatweights, flatbias);
+            float[] fullValues = Genome.Concatenate(flatweights, flatbias);
 
             return fullValues;
         }

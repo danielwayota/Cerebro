@@ -7,9 +7,7 @@ namespace Cerebro
 {
     public class Matrix
     {
-
         private float[,] values;
-
         public float[,] Values
         {
             get { return this.values; }
@@ -30,16 +28,36 @@ namespace Cerebro
             get { return this.Rows * this.Cols; }
         }
 
+        /// =================================================
+        /// <summary>
+        /// Default Matrix constructor.
+        /// The Matrix will have a 2D array with zeros at the begining.
+        /// </summary>
+        ///
+        /// <param name="r">Row count</param>
+        /// <param name="c">Column count</param>
         public Matrix(int r, int c)
         {
             this.values = new float[r, c];
         }
 
+        /// =================================================
+        /// <summary>
+        /// Creates a Matrix based on a 2D float array
+        /// </summary>
+        ///
+        /// <param name="values"></param>
         public Matrix(float[,] values)
         {
             this.values = values;
         }
 
+        /// =================================================
+        /// <summary>
+        /// Resets all the values with random values between -amplitude and amplitude
+        /// </summary>
+        ///
+        /// <param name="amplitude"></param>
         public void Randomize(float amplitude = 1.0f)
         {
             int r = this.Rows;
@@ -54,8 +72,21 @@ namespace Cerebro
             }
         }
 
+        /// =================================================
+        /// <summary>
+        /// Sets the values using some 2D array
+        /// </summary>
+        ///
+        /// <param name="flatArray"></param>
         public void Set(float[] flatArray)
         {
+            if (flatArray.Length != this.LinearSize)
+            {
+                throw new InvalidOperationException(
+                    String.Format("The Matrix and the 1D array have diferent linear lengths. {0} != {1}", this.LinearSize, flatArray.Length)
+                );
+            }
+
             int r = this.Rows;
             int c = this.Cols;
 
@@ -71,6 +102,12 @@ namespace Cerebro
             }
         }
 
+        /// =================================================
+        /// <summary>
+        /// Adds some Matrix to this value per value
+        /// </summary>
+        ///
+        /// <param name="some"></param>
         public void Add(Matrix some)
         {
             int r = this.Rows;
@@ -92,6 +129,12 @@ namespace Cerebro
             }
         }
 
+        /// =================================================
+        /// <summary>
+        /// Applies some function to the values
+        /// </summary>
+        ///
+        /// <param name="runner"></param>
         public void Map(Func<float, float> runner)
         {
             int r = this.Rows;
@@ -105,6 +148,12 @@ namespace Cerebro
             }
         }
 
+        /// =================================================
+        /// <summary>
+        /// Converts the Matrix into a 1D float array
+        /// </summary>
+        ///
+        /// <returns></returns>
         public float[] Flatten()
         {
             float[] result = new float[this.Rows * this.Cols];
@@ -137,8 +186,17 @@ namespace Cerebro
             }
         }
 
+        // =================================================
         // Statics
+        // =================================================
 
+        /// =================================================
+        /// <summary>
+        /// Creates a Column matrix with some 1D array
+        /// </summary>
+        ///
+        /// <param name="values"></param>
+        /// <returns></returns>
         public static Matrix From1DColum(float[] values)
         {
             float[,] data = new float[values.GetLength(0), 1];
@@ -151,6 +209,14 @@ namespace Cerebro
             return new Matrix(data);
         }
 
+        /// =================================================
+        /// <summary>
+        /// Performs a Matrix multiplication and returns the result
+        /// </summary>
+        ///
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static Matrix Product(Matrix a, Matrix b)
         {
             if (a.Cols != b.Rows)

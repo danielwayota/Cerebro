@@ -17,11 +17,23 @@ namespace Cerebro.Genetics
             }
         }
 
-        public Genome(float[] _genes)
+        /// =================================================
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        ///
+        /// <param name="genes"></param>
+        public Genome(float[] genes)
         {
-            this.Genes = _genes;
+            this.Genes = genes;
         }
 
+        /// =================================================
+        /// <summary>
+        /// Randomly changes some gene
+        /// </summary>
+        ///
+        /// <param name="chance"></param>
         public void Mutate(float chance)
         {
             for (int i = 0; i < this.Genes.Length; i++)
@@ -35,6 +47,14 @@ namespace Cerebro.Genetics
             }
         }
 
+        /// =================================================
+        /// <summary>
+        /// Performs the crossover and produces an offspring
+        /// </summary>
+        ///
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static Genome Crossover(Genome a, Genome b)
         {
             float[] offspringGenes = new float[a.Genes.Length];
@@ -47,6 +67,15 @@ namespace Cerebro.Genetics
             return new Genome(offspringGenes);
         }
 
+        /// =================================================
+        /// <summary>
+        /// Extracts some chunk from the full genome
+        /// </summary>
+        ///
+        /// <param name="genes"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
         public static float[] Slice(float[] genes, int start, int end)
         {
             int count = end - start;
@@ -60,7 +89,15 @@ namespace Cerebro.Genetics
             return slice;
         }
 
-        public static float[] MergeGenes(float[] a, float[] b)
+        /// =================================================
+        /// <summary>
+        /// Concatenates two 1D float arrays
+        /// </summary>
+        ///
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static float[] Concatenate(float[] a, float[] b)
         {
             float[] c = new float[a.Length + b.Length];
 
