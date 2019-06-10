@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cerebro.Factory
+namespace CerebroML.Factory
 {
     public enum LayerType
     {

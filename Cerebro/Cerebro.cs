@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Cerebro.Genetics;
+using CerebroML.Genetics;
 
-namespace Cerebro
+namespace CerebroML
 {
-    public class Network
+    public class Cerebro
     {
         public Layer[] Layers
         {
@@ -29,7 +29,7 @@ namespace Cerebro
         /// </summary>
         ///
         /// <param name="layers">The layers array</param>
-        public Network(Layer[] layers)
+        public Cerebro(Layer[] layers)
         {
             this.Layers = layers;
         }

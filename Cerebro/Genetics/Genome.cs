@@ -1,7 +1,7 @@
 using System;
-using Cerebro.Util;
+using CerebroML.Util;
 
-namespace Cerebro.Genetics
+namespace CerebroML.Genetics
 {
     public class Genome
     {

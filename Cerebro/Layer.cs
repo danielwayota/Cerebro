@@ -1,8 +1,8 @@
 ﻿using System;
-using Cerebro.Activation;
-using Cerebro.Genetics;
+using CerebroML.Activation;
+using CerebroML.Genetics;
 
-namespace Cerebro
+namespace CerebroML
 {
     public class Layer
     {

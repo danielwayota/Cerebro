@@ -1,4 +1,4 @@
-﻿namespace Cerebro.Activation
+﻿namespace CerebroML.Activation
 {
     public interface IActivator
     {

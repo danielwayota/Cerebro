@@ -1,7 +1,7 @@
 ﻿using System;
-using Cerebro;
-using Cerebro.Activation;
-using Cerebro.Genetics;
+using CerebroML;
+using CerebroML.Activation;
+using CerebroML.Genetics;
 
 namespace Examples
 {

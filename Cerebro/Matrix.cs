@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Cerebro.Util;
+using CerebroML.Util;
 
-namespace Cerebro
+namespace CerebroML
 {
     public class Matrix
     {

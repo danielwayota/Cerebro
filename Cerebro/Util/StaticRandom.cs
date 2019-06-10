@@ -1,4 +1,4 @@
-namespace Cerebro.Util
+namespace CerebroML.Util
 {
     public class StaticRandom
     {

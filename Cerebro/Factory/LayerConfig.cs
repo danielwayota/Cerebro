@@ -1,4 +1,4 @@
-﻿namespace Cerebro.Factory
+﻿namespace CerebroML.Factory
 {
     public struct LayerConfig
     {

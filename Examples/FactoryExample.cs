@@ -1,4 +1,4 @@
-﻿using Cerebro.Factory;
+﻿using CerebroML.Factory;
 
 namespace Examples
 {
@@ -6,7 +6,7 @@ namespace Examples
     {
         public static void Run()
         {
-            Cerebro.Network net = Factory.Create()
+            CerebroML.Cerebro net = Factory.Create()
                 .WithInput(2)
                 .WithLayer(3, LayerType.Tanh)
                 .WithLayer(1, LayerType.Sigmoid)

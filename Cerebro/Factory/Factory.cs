@@ -1,8 +1,8 @@
-﻿using Cerebro.Activation;
-using Cerebro.Genetics;
+﻿using CerebroML.Activation;
+using CerebroML.Genetics;
 using System.Collections.Generic;
 
-namespace Cerebro.Factory
+namespace CerebroML.Factory
 {
     public class Factory
     {
@@ -64,7 +64,7 @@ namespace Cerebro.Factory
         /// </summary>
         /// 
         /// <returns></returns>
-        public Network Build()
+        public Cerebro Build()
         {
             if (this.inputNeurons <= 0)
             {
@@ -104,7 +104,7 @@ namespace Cerebro.Factory
                 lastNeuronCount = config.neuronCount;
             }
 
-            Network net = new Network(layers);
+            Cerebro net = new Cerebro(layers);
 
             if (this.genome != null)
             {

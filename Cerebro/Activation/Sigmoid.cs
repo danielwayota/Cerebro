@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cerebro.Activation
+namespace CerebroML.Activation
 {
     public class Sigmoid : IActivator
     {

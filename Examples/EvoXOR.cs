@@ -1,7 +1,7 @@
-﻿using Cerebro;
-using Cerebro.Activation;
-using Cerebro.Factory;
-using Cerebro.Genetics;
+﻿using CerebroML;
+using CerebroML.Activation;
+using CerebroML.Factory;
+using CerebroML.Genetics;
 
 using System;
 using System.Collections.Generic;
@@ -10,21 +10,21 @@ namespace Examples
 {
     public class EvoXOR
     {
-        public static Network CreateNetwork()
+        public static Cerebro CreateNetwork()
         {
             Layer[] layers = new Layer[] {
                 new Layer(2, 2, new Tanh()),
                 new Layer(2, 1, new Sigmoid())
             };
 
-            return new Network(layers);
+            return new CerebroML.Cerebro(layers);
         }
 
         public static void Run()
         {
             // Generate first population
             int popMax = 250;
-            List<Network> population = new List<Network>();
+            List<CerebroML.Cerebro> population = new List<CerebroML.Cerebro>();
 
             Factory factory = Factory.Create()
                 .WithInput(2)
@@ -38,7 +38,7 @@ namespace Examples
 
             // The record
             float kingFitness = 0;
-            Network king = null;
+            CerebroML.Cerebro king = null;
 
             int generation = 0;
 
@@ -75,11 +75,11 @@ namespace Examples
                 }
 
                 // Make new population
-                List<Network> newPop = new List<Network>();
+                List<CerebroML.Cerebro> newPop = new List<CerebroML.Cerebro>();
                 for (int e = 0; e < popMax; e++)
                 {
                     // Find Two parents to make cross over.
-                    List<Network> parents = new List<Network>();
+                    List<CerebroML.Cerebro> parents = new List<CerebroML.Cerebro>();
 
                     int control = 0;
                     Random rnd = new Random();
@@ -95,7 +95,7 @@ namespace Examples
                         }
                     }
 
-                    Network offspring = factory.Build();
+                    CerebroML.Cerebro offspring = factory.Build();
 
                     // Perform cross over and 'inject' the new Genome into the new network
                     if (parents.Count == 2)
@@ -126,7 +126,7 @@ namespace Examples
             }
         }
 
-        public static float CalcFitness(Network network)
+        public static float CalcFitness(CerebroML.Cerebro network)
         {
             float[][] input = new float[][]{
                 new float[] { 0.0f, 0.0f },
