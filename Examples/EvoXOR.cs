@@ -1,5 +1,6 @@
 ﻿using Cerebro;
 using Cerebro.Activation;
+using Cerebro.Factory;
 using Cerebro.Genetics;
 
 using System;
@@ -9,15 +10,30 @@ namespace Examples
 {
     public class EvoXOR
     {
+        public static Network CreateNetwork()
+        {
+            Layer[] layers = new Layer[] {
+                new Layer(2, 2, new Tanh()),
+                new Layer(2, 1, new Sigmoid())
+            };
+
+            return new Network(layers);
+        }
+
         public static void Run()
         {
             // Generate first population
             int popMax = 250;
             List<Network> population = new List<Network>();
 
+            Factory factory = Factory.Create()
+                .WithInput(2)
+                .WithLayer(2, LayerType.Tanh)
+                .WithLayer(1, LayerType.Sigmoid);
+
             for (int i = 0; i < popMax; i++)
             {
-                population.Add( CreateNetwork() );
+                population.Add( factory.Build() );
             }
 
             // The record
@@ -79,7 +95,7 @@ namespace Examples
                         }
                     }
 
-                    Network offspring = CreateNetwork();
+                    Network offspring = factory.Build();
 
                     // Perform cross over and 'inject' the new Genome into the new network
                     if (parents.Count == 2)
@@ -108,16 +124,6 @@ namespace Examples
                 Console.WriteLine(String.Format(" - (0, 1) = {0:0.00}", king.Run(new float[] { 0.0f, 1.0f })[0]));
                 Console.WriteLine(String.Format(" - (1, 1) = {0:0.00}", king.Run(new float[] { 1.0f, 1.0f })[0]));
             }
-        }
-
-        public static Network CreateNetwork()
-        {
-            Layer[] layers = new Layer[] {
-                new Layer(2, 2, new Tanh()),
-                new Layer(2, 1, new Sigmoid())
-            };
-
-            return new Network(layers);
         }
 
         public static float CalcFitness(Network network)
