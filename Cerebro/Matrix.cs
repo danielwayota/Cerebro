@@ -31,7 +31,7 @@ namespace CerebroML
         /// =================================================
         /// <summary>
         /// Default Matrix constructor.
-        /// The Matrix will have a 2D array with zeros at the begining.
+        /// The Matrix will have a 1D array with zeros at the begining.
         /// </summary>
         ///
         /// <param name="r">Row count</param>
@@ -46,7 +46,7 @@ namespace CerebroML
 
         /// =================================================
         /// <summary>
-        /// Creates a Matrix based on a 2D float array
+        /// Creates a Matrix based on a 1D float array
         /// </summary>
         ///
         /// <param name="values"></param>
@@ -74,7 +74,7 @@ namespace CerebroML
 
         /// =================================================
         /// <summary>
-        /// Sets the values using some 2D array
+        /// Sets the values using some 1D array
         /// </summary>
         ///
         /// <param name="flatArray"></param>

@@ -34,7 +34,8 @@ namespace CerebroML.Genetics
         /// </summary>
         ///
         /// <param name="chance"></param>
-        public void Mutate(float chance)
+        /// <param name="amplitude">The amplitude used to generate the mutation. Range: (-amplitude, amplitude)</param>
+        public void Mutate(float chance, float amplitude = 1f)
         {
             for (int i = 0; i < this.Genes.Length; i++)
             {
@@ -42,7 +43,7 @@ namespace CerebroML.Genetics
 
                 if (dice < chance)
                 {
-                    this.Genes[i] = StaticRandom.NextBilinear(10f);
+                    this.Genes[i] = StaticRandom.NextBilinear(amplitude);
                 }
             }
         }

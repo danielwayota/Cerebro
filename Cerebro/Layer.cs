@@ -29,12 +29,21 @@ namespace CerebroML
         public Layer(int lastNeurons, int neuronCount, IActivator activator)
         {
             this.weights = new Matrix(neuronCount, lastNeurons);
-            this.weights.Randomize(10f);
-
             this.bias = new Matrix(neuronCount, 1);
-            this.bias.Randomize(10f);
 
             this.activator = activator;
+        }
+
+        /// =================================================
+        /// <summary>
+        /// Randomizes the weights and biases
+        /// </summary>
+        ///
+        /// <param name="amplitude">The amplitude used to generate the weights and biases. Range: (-amplitude, amplitude)</param>
+        public void Initialize(float amplitude)
+        {
+            this.weights.Randomize(amplitude);
+            this.bias.Randomize(amplitude);
         }
 
         /// =================================================

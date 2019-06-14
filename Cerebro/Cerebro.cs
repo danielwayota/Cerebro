@@ -36,6 +36,19 @@ namespace CerebroML
 
         /// =================================================
         /// <summary>
+        /// Calls Initialize() on the layers
+        /// </summary>
+        /// <param name="amplitude">The amplitude used to generate the weights and biases. Range: (-amplitude, amplitude)</param>
+        public void Initialize(float amplitude)
+        {
+            foreach(var layer in this.Layers)
+            {
+                layer.Initialize(amplitude);
+            }
+        }
+
+        /// =================================================
+        /// <summary>
         /// Executes the feedfoward of the network
         /// </summary>
         ///

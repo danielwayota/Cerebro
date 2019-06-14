@@ -27,6 +27,7 @@ namespace Examples
             List<CerebroML.Cerebro> population = new List<CerebroML.Cerebro>();
 
             Factory factory = Factory.Create()
+                .WithWeightBiasAmplitude(10f)
                 .WithInput(2)
                 .WithLayer(2, LayerType.Tanh)
                 .WithLayer(1, LayerType.Sigmoid);
@@ -104,7 +105,7 @@ namespace Examples
                         Genome e2 = parents[1].GetGenome();
 
                         Genome child = Genome.Crossover(e1, e2);
-                        child.Mutate(0.01f);
+                        child.Mutate(0.01f, 10f);
 
                         offspring.SetGenome(child);
                     }

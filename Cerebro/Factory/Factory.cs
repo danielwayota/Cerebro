@@ -12,17 +12,20 @@ namespace CerebroML.Factory
 
         private Genome genome;
 
+        private float weightsBiasAmplitude;
+
         private Factory()
         {
             this.inputNeurons = 0;
             this.layerConfigs = new List<LayerConfig>();
+            this.weightsBiasAmplitude = 1f;
         }
 
         /// =================================================
         /// <summary>
         /// Sets the input neuron count
         /// </summary>
-        /// 
+        ///
         /// <param name="inputNeurons"></param>
         /// <returns></returns>
         public Factory WithInput(int inputNeurons)
@@ -35,7 +38,7 @@ namespace CerebroML.Factory
         /// <summary>
         /// Adds new layer configuration
         /// </summary>
-        /// 
+        ///
         /// <param name="neuronCount"></param>
         /// <param name="type"></param>
         /// <returns></returns>
@@ -49,7 +52,7 @@ namespace CerebroML.Factory
         /// <summary>
         /// Sets the result network genome
         /// </summary>
-        /// 
+        ///
         /// <param name="genome"></param>
         /// <returns></returns>
         public Factory WithGenome(Genome genome)
@@ -58,11 +61,17 @@ namespace CerebroML.Factory
             return this;
         }
 
+        public Factory WithWeightBiasAmplitude(float amplitude)
+        {
+            this.weightsBiasAmplitude = amplitude;
+            return this;
+        }
+
         /// =================================================
         /// <summary>
         /// Creates the neural network with the given configuration
         /// </summary>
-        /// 
+        ///
         /// <returns></returns>
         public Cerebro Build()
         {
@@ -110,12 +119,16 @@ namespace CerebroML.Factory
             {
                 net.SetGenome(this.genome);
             }
+            else
+            {
+                net.Initialize(this.weightsBiasAmplitude);
+            }
 
             return net;
         }
 
         // Statics
-   
+
         public static Factory Create()
         {
             return new Factory();
