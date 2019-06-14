@@ -66,13 +66,13 @@ namespace Examples
                 // Write to the console the current king and the average fitness
                 if (generation % 250 == 0)
                 {
-                    Console.WriteLine(String.Format("Gen {0}", generation));
-                    Console.WriteLine(String.Format("Fitness: King- {1:0.00} AVG- {0:0.00}", total / popMax, kingFitness));
+                    Console.WriteLine($"Gen {generation}");
+                    Console.WriteLine($"Fitness: King- {kingFitness:0.00} AVG- {total / popMax:0.00}");
 
-                    Console.WriteLine(String.Format(" - (0, 0) = {0:0.00}", king.Run(new float[] { 0.0f, 0.0f })[0]));
-                    Console.WriteLine(String.Format(" - (1, 0) = {0:0.00}", king.Run(new float[] { 1.0f, 0.0f })[0]));
-                    Console.WriteLine(String.Format(" - (0, 1) = {0:0.00}", king.Run(new float[] { 0.0f, 1.0f })[0]));
-                    Console.WriteLine(String.Format(" - (1, 1) = {0:0.00}", king.Run(new float[] { 1.0f, 1.0f })[0]));
+                    Console.WriteLine($" - (0, 0) = {king.Run(new float[] { 0.0f, 0.0f })[0]:0.00}");
+                    Console.WriteLine($" - (1, 0) = {king.Run(new float[] { 1.0f, 0.0f })[0]:0.00}");
+                    Console.WriteLine($" - (0, 1) = {king.Run(new float[] { 0.0f, 1.0f })[0]:0.00}");
+                    Console.WriteLine($" - (1, 1) = {king.Run(new float[] { 1.0f, 1.0f })[0]:0.00}");
                 }
 
                 // Make new population
@@ -118,12 +118,12 @@ namespace Examples
             if (king != null)
             {
                 Console.WriteLine("FINAL");
-                Console.WriteLine(String.Format("Fitness: King- {0:0.00}", kingFitness));
+                Console.WriteLine($"Fitness: King- {kingFitness:0.00}");
 
-                Console.WriteLine(String.Format(" - (0, 0) = {0:0.00}", king.Run(new float[] { 0.0f, 0.0f })[0]));
-                Console.WriteLine(String.Format(" - (1, 0) = {0:0.00}", king.Run(new float[] { 1.0f, 0.0f })[0]));
-                Console.WriteLine(String.Format(" - (0, 1) = {0:0.00}", king.Run(new float[] { 0.0f, 1.0f })[0]));
-                Console.WriteLine(String.Format(" - (1, 1) = {0:0.00}", king.Run(new float[] { 1.0f, 1.0f })[0]));
+                Console.WriteLine($" - (0, 0) = {king.Run(new float[] { 0.0f, 0.0f })[0]:0.00}");
+                Console.WriteLine($" - (1, 0) = {king.Run(new float[] { 1.0f, 0.0f })[0]:0.00}");
+                Console.WriteLine($" - (0, 1) = {king.Run(new float[] { 0.0f, 1.0f })[0]:0.00}");
+                Console.WriteLine($" - (1, 1) = {king.Run(new float[] { 1.0f, 1.0f })[0]:0.00}");
             }
         }
 

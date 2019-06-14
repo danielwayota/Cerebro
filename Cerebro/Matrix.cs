@@ -83,7 +83,7 @@ namespace CerebroML
             if (flatArray.Length != this.values.Length)
             {
                 throw new InvalidOperationException(
-                    String.Format("The Matrix and the 1D array have diferent linear lengths. {0} != {1}", this.LinearSize, flatArray.Length)
+                    $"The Matrix and the 1D array have diferent linear lengths. {this.LinearSize} != {flatArray.Length}"
                 );
             }
 
@@ -107,7 +107,7 @@ namespace CerebroML
             if (r != some.Rows || c != some.Cols)
             {
                 throw new InvalidOperationException(
-                    String.Format("Cannot add matrices of diferent size. {0} {1} != {2} {3}", r, c, some.Rows, some.Cols)
+                    $"Cannot add matrices of diferent size. {r} {c} != {some.Rows} {some.Cols}"
                 );
             }
 
@@ -188,7 +188,7 @@ namespace CerebroML
             if (a.Cols != b.Rows)
             {
                 throw new InvalidOperationException(
-                    String.Format("A columns should be equal to B rows. {0} {1} != {2} {3}", a.Rows, a.Cols, b.Rows, b.Cols)
+                    $"A columns should be equal to B rows. {a.Rows} {a.Cols} != {b.Rows} {b.Cols}"
                 );
             }
 

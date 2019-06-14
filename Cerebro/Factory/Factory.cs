@@ -78,7 +78,7 @@ namespace CerebroML.Factory
             if (this.inputNeurons <= 0)
             {
                 throw new System.InvalidOperationException(
-                    string.Format("The input neuron count is invalid: {0}", this.inputNeurons)
+                    $"The input neuron count is invalid: {this.inputNeurons}"
                 );
             }
 

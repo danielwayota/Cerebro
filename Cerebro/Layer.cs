@@ -74,7 +74,7 @@ namespace CerebroML
             if (this.GenomeSize != genes.Length)
             {
                 throw new InvalidOperationException(
-                    string.Format("The Layer and the new genome are incompatible. Sizes {0} != {1}", this.GenomeSize, genes.Length)
+                    $"The Layer and the new genome are incompatible. Sizes {this.GenomeSize} != {genes.Length}"
                 );
             }
             float[] w = Genome.Slice(genes, 0, this.weights.LinearSize);

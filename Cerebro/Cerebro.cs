@@ -78,7 +78,7 @@ namespace CerebroML
             if (this.GenomeSize != genome.Size)
             {
                 throw new InvalidOperationException(
-                    string.Format("The Network and the new genome are incompatible. Sizes {0} != {1}", this.GenomeSize, genome.Size)
+                    $"The Network and the new genome are incompatible. Sizes {this.GenomeSize} != {genome.Size}"
                 );
             }
 
