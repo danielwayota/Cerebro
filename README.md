@@ -23,7 +23,7 @@ brain.Initialize(10f);
 
 *Use the factory to create one cerebro*
 ```c
-Cerebro net = Factory.Create()
+Cerebro net = BrainFactory.Create()
     .WithInput(2)
     .WithLayer(3, LayerType.Tanh)
     .WithLayer(1, LayerType.Sigmoid)
@@ -32,7 +32,7 @@ Cerebro net = Factory.Create()
 
 *Use a common factory to create several cerebros*
 ```c
-Factory factory = Factory.Create()
+BrainFactory factory = BrainFactory.Create()
     .WithInput(2)
     .WithLayer(3, LayerType.Tanh)
     .WithLayer(1, LayerType.Sigmoid)
@@ -45,7 +45,7 @@ Cerebro someDiferentNet = factory.Build();
 
 *Clone cerebros*
 ```c
-Factory factory = Factory.Create()
+BrainFactory factory = BrainFactory.Create()
     .WithInput(2)
     .WithLayer(3, LayerType.Tanh)
     .WithLayer(1, LayerType.Sigmoid)
@@ -63,7 +63,7 @@ Cerebro clone = factory.WithGenome(gen).Build();
 *Crossover*
 
 ```c
-Factory factory = Factory.Create()
+BrainFactory factory = BrainFactory.Create()
     .WithInput(2)
     .WithLayer(3, LayerType.Tanh)
     .WithLayer(1, LayerType.Sigmoid)

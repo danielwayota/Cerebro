@@ -26,7 +26,7 @@ namespace Examples
             int popMax = 250;
             List<CerebroML.Cerebro> population = new List<CerebroML.Cerebro>();
 
-            Factory factory = Factory.Create()
+            BrainFactory factory = BrainFactory.Create()
                 .WithWeightBiasAmplitude(10f)
                 .WithInput(2)
                 .WithLayer(2, LayerType.Tanh)

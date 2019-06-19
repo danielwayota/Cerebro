@@ -6,7 +6,7 @@ namespace Examples
     {
         public static void Run()
         {
-            CerebroML.Cerebro net = Factory.Create()
+            CerebroML.Cerebro net = BrainFactory.Create()
                 .WithInput(2)
                 .WithLayer(3, LayerType.Tanh)
                 .WithLayer(1, LayerType.Sigmoid)

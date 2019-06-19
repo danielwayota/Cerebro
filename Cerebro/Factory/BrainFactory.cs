@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace CerebroML.Factory
 {
-    public class Factory
+    public class BrainFactory
     {
         private int inputNeurons;
 
@@ -14,7 +14,7 @@ namespace CerebroML.Factory
 
         private float weightsBiasAmplitude;
 
-        private Factory()
+        private BrainFactory()
         {
             this.inputNeurons = 0;
             this.layerConfigs = new List<LayerConfig>();
@@ -28,7 +28,7 @@ namespace CerebroML.Factory
         ///
         /// <param name="inputNeurons"></param>
         /// <returns></returns>
-        public Factory WithInput(int inputNeurons)
+        public BrainFactory WithInput(int inputNeurons)
         {
             this.inputNeurons = inputNeurons;
             return this;
@@ -42,7 +42,7 @@ namespace CerebroML.Factory
         /// <param name="neuronCount"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public Factory WithLayer(int neuronCount, LayerType type)
+        public BrainFactory WithLayer(int neuronCount, LayerType type)
         {
             this.layerConfigs.Add(new LayerConfig(neuronCount, type));
             return this;
@@ -55,13 +55,13 @@ namespace CerebroML.Factory
         ///
         /// <param name="genome"></param>
         /// <returns></returns>
-        public Factory WithGenome(Genome genome)
+        public BrainFactory WithGenome(Genome genome)
         {
             this.genome = genome;
             return this;
         }
 
-        public Factory WithWeightBiasAmplitude(float amplitude)
+        public BrainFactory WithWeightBiasAmplitude(float amplitude)
         {
             this.weightsBiasAmplitude = amplitude;
             return this;
@@ -129,9 +129,9 @@ namespace CerebroML.Factory
 
         // Statics
 
-        public static Factory Create()
+        public static BrainFactory Create()
         {
-            return new Factory();
+            return new BrainFactory();
         }
     }
 }
