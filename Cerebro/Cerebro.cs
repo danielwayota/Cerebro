@@ -4,7 +4,7 @@ using CerebroML.Genetics;
 
 namespace CerebroML
 {
-    public class Cerebro
+    public class Cerebro: IEntity
     {
         public Layer[] Layers
         {

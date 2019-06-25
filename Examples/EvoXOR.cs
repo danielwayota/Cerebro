@@ -6,20 +6,14 @@ using CerebroML.Genetics;
 using System;
 using System.Collections.Generic;
 
+/**
+    Simple XOR training using neuro evolution
+ */
+
 namespace Examples
 {
     public class EvoXOR
     {
-        public static Cerebro CreateNetwork()
-        {
-            Layer[] layers = new Layer[] {
-                new Layer(2, 2, new Tanh()),
-                new Layer(2, 1, new Sigmoid())
-            };
-
-            return new CerebroML.Cerebro(layers);
-        }
-
         public static void Run()
         {
             // Generate first population

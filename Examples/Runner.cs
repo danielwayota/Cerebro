@@ -17,9 +17,10 @@ namespace Examples
         static void Main(string[] args)
         {
             Console.WriteLine("---------------------------");
-            Console.WriteLine("Evolutive XOR");
+            Console.WriteLine("Evolutive XOR with population wrapper");
             Console.WriteLine("---------------------------");
-            EvoXOR.Run();
+            // EvoXOR.Run();
+            XORPopulation.Run();
             // FactoryExample.Run();
         }
     }
