@@ -1,6 +1,4 @@
-﻿using CerebroML;
-using CerebroML.Activation;
-using CerebroML.Factory;
+﻿using CerebroML.Factory;
 using CerebroML.Genetics;
 
 using System;
