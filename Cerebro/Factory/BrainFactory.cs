@@ -117,7 +117,7 @@ namespace CerebroML.Factory
 
             if (this.genome != null)
             {
-                net.SetGenome(this.genome);
+                net.SetGenome(this.genome.Clone());
             }
             else
             {

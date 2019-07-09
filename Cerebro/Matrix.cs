@@ -85,10 +85,7 @@ namespace CerebroML
                 );
             }
 
-            for (int i = 0; i < this.values.Length; i++)
-            {
-                this.values[i] = flatArray[i];
-            }
+            this.values = flatArray;
         }
 
         /// =================================================

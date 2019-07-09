@@ -23,6 +23,8 @@ namespace CerebroML
             }
         }
 
+        private Genome innerGenome;
+
         /// =================================================
         /// <summary>
         /// Default Neural network constructor
@@ -82,6 +84,8 @@ namespace CerebroML
                 );
             }
 
+            this.innerGenome = genome;
+
             int index = 0;
             foreach (var layer in this.Layers)
             {
@@ -106,14 +110,19 @@ namespace CerebroML
         /// <returns>The genome</returns>
         public Genome GetGenome()
         {
-            List<float> genes = new List<float>();
-
-            foreach (var layer in this.Layers)
+            if (this.innerGenome == null)
             {
-                genes.AddRange(layer.GetGenes());
+                List<float> genes = new List<float>(this.GenomeSize);
+
+                foreach (var layer in this.Layers)
+                {
+                    genes.AddRange(layer.GetGenes());
+                }
+
+                this.innerGenome = new Genome(genes.ToArray());
             }
 
-            return new Genome(genes.ToArray());
+            return this.innerGenome;
         }
     }
 }

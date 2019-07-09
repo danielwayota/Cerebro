@@ -50,6 +50,19 @@ namespace CerebroML.Genetics
 
         /// =================================================
         /// <summary>
+        /// Makes an exact copy of itself
+        /// </summary>
+        ///
+        /// <returns></returns>
+        public Genome Clone()
+        {
+            float[] genes = Genome.Slice(this.Genes, 0, this.Genes.Length);
+
+            return new Genome(genes);
+        }
+
+        /// =================================================
+        /// <summary>
         /// Performs the crossover and produces an offspring
         /// </summary>
         ///
