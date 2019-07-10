@@ -61,6 +61,8 @@ namespace CerebroML.Genetics
         /// </summary>
         public void Next()
         {
+            this.OnBeforeNextGeneration();
+
             this.generationNumber++;
 
             // Calculate the fitness for each entity
@@ -162,6 +164,8 @@ namespace CerebroML.Genetics
 
             return sum / this.fitnessList.Length;
         }
+
+        public virtual void OnBeforeNextGeneration() {}
 
         public virtual void OnNoParentsFound() {}
         public virtual void OnEntityReset(TEntity entity) {}
