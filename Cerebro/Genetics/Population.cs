@@ -1,3 +1,4 @@
+using UnityEngine;
 using CerebroML.Util;
 
 namespace CerebroML.Genetics
@@ -106,7 +107,7 @@ namespace CerebroML.Genetics
                     }
                 }
 
-                if (parents.Length == 2)
+                if (parentCount == 2)
                 {
                     // Crossover
                     Genome g1 = parents[0];
@@ -167,7 +168,11 @@ namespace CerebroML.Genetics
 
         public virtual void OnBeforeNextGeneration() {}
 
-        public virtual void OnNoParentsFound() {}
+        public virtual void OnNoParentsFound() {
+            throw new System.ApplicationException(
+                $"There where no valid parents found"
+            );
+        }
         public virtual void OnEntityReset(TEntity entity) {}
 
         public abstract float GetFitness(TEntity entity, int index);
