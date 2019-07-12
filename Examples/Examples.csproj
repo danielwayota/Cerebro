@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="EvoXOR.cs" />
     <Compile Include="XORPopulation.cs" />
+    <Compile Include="NameIndexedBufferExample.cs" />
     <Compile Include="FactoryExample.cs" />
     <Compile Include="Runner.cs" />
   </ItemGroup>

@@ -2,7 +2,11 @@ using System.Collections.Generic;
 
 namespace CerebroML.Util
 {
-    class NameIndexedBuffer
+    /**
+     * This class can be used to create an easy to modify buffer
+     *  to input data into a Cerebro.
+     */
+    public class NameIndexedBuffer
     {
         protected Dictionary<string, int> indexDict;
         protected List<float> buffer;
